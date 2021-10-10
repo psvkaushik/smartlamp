@@ -1,15 +1,8 @@
 #include "Arduino.h"
 
 
-const int trigPin1 = 34;
-const int echoPin1 = 35;
-#define redled 32
-#define grnled 33
-
-
-
-
-
+const int trigPin1 = 35;
+const int echoPin1 = 34;
 
 
 long duration1;
@@ -18,33 +11,39 @@ void setup()
 {
   pinMode(trigPin1, OUTPUT);
   pinMode(echoPin1, INPUT);
-  pinMode(redled, OUTPUT);
-  pinMode(grnled, OUTPUT);
-  digitalWrite(redled, LOW);
-  digitalWrite(grnled, LOW);
+
+  pinMode(14,OUTPUT);
   Serial.begin(115200);
-  pinMode(32,OUTPUT);
+
+
 
 }
 void loop()
 {
 
+
+  digitalWrite(trigPin1, LOW);
+  delayMicroseconds(2);
+  digitalWrite(trigPin1,HIGH);
+  delayMicroseconds(50);
   digitalWrite(trigPin1, LOW);
   duration1 = pulseIn(echoPin1, HIGH);
   distance1 = duration1 * 0.034 / 2;
   Serial.println(distance1);
   if (distance1 <= 15)
   {
-    digitalWrite(32, HIGH);
-
-
-    delay(1500);
+    digitalWrite(14,LOW);
+    delay(1000);
+    digitalWrite(14, HIGH);
+    delay(1000);
+    delay(1000);
 
   }
   else
   {
 
-    digitalWrite(32, LOW);
+    digitalWrite(14, HIGH);
+    delay(1000);
   }
 
 }
